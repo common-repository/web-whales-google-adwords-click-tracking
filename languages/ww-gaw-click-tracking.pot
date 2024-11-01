@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ww-gaw-click-tracking\n"
+"POT-Creation-Date: 2016-09-27 10:14+0200\n"
+"Last-Translator: Ronald Edelschaap <rlwedelschaap@gmail.com>\n"
+"Language-Team: Web Whales <it@webwhales.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../web-whales-google-adwords-click-tracking.php:134
+msgid "The settings have been updated."
+msgstr ""
+
+#: ../web-whales-google-adwords-click-tracking.php:188
+#: ../web-whales-google-adwords-click-tracking.php:189
+msgid "Google AdWords Click Tracking"
+msgstr ""
+
+#: ../templates/settings.phtml:18
+msgid "Default Conversion Currency"
+msgstr ""
+
+#: ../templates/settings.phtml:22
+#, php-format
+msgid ""
+"In ISO 4217 format, e.g. \"EUR\" or \"USD\". See <a href=\"%1$s\" target="
+"\"_blank\">%1$s</a> for a complete list of valid currency codes."
+msgstr ""
+
+#: ../templates/settings.phtml:26
+msgid "Default Conversion ID"
+msgstr ""
+
+#: ../templates/settings.phtml:32
+msgid "Default Conversion Label"
+msgstr ""
+
+#: ../templates/settings.phtml:38
+msgid "Default Conversion Value"
+msgstr ""
+
+#: ../templates/settings.phtml:44
+msgid "Default Remarketing Only State"
+msgstr ""
+
+#: ../templates/settings.phtml:57
+msgid "Load the Google AdWords conversion script"
+msgstr ""
+
+#: ../templates/settings.phtml:68
+msgid ""
+"Disable loading the asynchronous conversion script when it's already been "
+"loaded by your theme or another plugin."
+msgstr ""
+
+#: ../templates/settings.phtml:81
+msgid "Usage"
+msgstr ""
+
+#: ../templates/settings.phtml:85 ../templates/settings.phtml:91
+#: ../templates/settings.phtml:99
+#, php-format
+msgid "Step %d"
+msgstr ""
+
+#: ../templates/settings.phtml:87
+#, php-format
+msgid ""
+"Create a new conversion action in your Google AdWords account. Make sure to "
+"set \"Choose whether to track conversions on a page load or click\" to "
+"\"Click\". Read the <a href=\"%1$s\" target=\"_blank\">AdWords Help pages</"
+"a> if you need help with setting up conversion tracking."
+msgstr ""
+
+#: ../templates/settings.phtml:87
+msgid "https://support.google.com/adwords/answer/6095821"
+msgstr ""
+
+#: ../templates/settings.phtml:93
+#, php-format
+msgid ""
+"Look up the conversion tag and use the values of the %s variables. If this "
+"is your first conversion action you want to track using this plugin, you can "
+"save these values in the fields above. Otherwise, use them in combination "
+"with the %s attributes as shown in the examples below. You can optionally "
+"change the currency and value fields to whatever you like."
+msgstr ""
+
+#: ../templates/settings.phtml:94
+msgid ""
+"The conversion tag should look like the code below. Note that the fields you "
+"have to use are marked."
+msgstr ""
+
+#: ../templates/settings.phtml:101
+#, php-format
+msgid ""
+"Use the class %s on an HTML element to track a conversion when a visitor "
+"clicks on that element. When the element with the %1$s class has an %s or a "
+"%s attribute, or when the element with that class contains an element with "
+"one of these attributes, that URL will be followed after the conversion has "
+"been tracked."
+msgstr ""
+
+#: ../templates/settings.phtml:107
+msgid "Standard usage"
+msgstr ""
+
+#: ../templates/settings.phtml:108
+#, php-format
+msgid ""
+"Use just the class %s on an HTML element to track clicks using the default "
+"settings above."
+msgstr ""
+
+#: ../templates/settings.phtml:118
+msgid "Overwriting default values"
+msgstr ""
+
+#: ../templates/settings.phtml:119
+#, php-format
+msgid ""
+"Use the class %s in combination with one or more %s attributes to overwrite "
+"the default settings above for just one element."
+msgstr ""
+
+#: ../templates/settings.phtml:126
+#, php-format
+msgid "The following %s attributes are available to use:"
+msgstr ""
+
+#: ../templates/settings.phtml:132
+msgid "Use a dot as a decimal separator."
+msgstr ""
+
+#: ../templates/settings.phtml:140
+msgid "Following a link with elements other than anchors or buttons"
+msgstr ""
+
+#: ../templates/settings.phtml:141
+#, php-format
+msgid ""
+"Use the %s attribute to follow a link after a click on HTML elements that do "
+"not allow the %s attribute, such as an %s element."
+msgstr ""
+
+#: ../templates/settings.phtml:151
+msgid "Following a link from an anchor inside the tracked element"
+msgstr ""
+
+#: ../templates/settings.phtml:152
+#, php-format
+msgid ""
+"When the element with the tracking class contains an element with an %s or a "
+"%s attribute, that URL will be followed after the conversion has been "
+"tracked. This comes in handy when you use a page builder where you cannot "
+"add the tracking class to the anchor or button directly."
+msgstr ""

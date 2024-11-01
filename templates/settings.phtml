@@ -1,0 +1,159 @@
+<?php
+	/**
+	 * @var WW_Google_AdWords_Click_Tracking $_this
+	 */
+?>
+
+<div class="wrap">
+	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+
+	<?php
+		$_this->print_admin_error_notices();
+		$_this->print_admin_update_notices();
+	?>
+
+	<form method="post" id="save-plugin-settings">
+		<table class="form-table">
+			<tr>
+				<th scope="row"><label for="default_conversion_currency"><?php _e( 'Default Conversion Currency', $_this->text_domain() ); ?></label></th>
+				<td>
+					<input type="text" class="regular-text" id="default_conversion_currency" name="default_conversion_currency" value="<?php echo esc_attr( $_this->option( 'default_conversion_currency', 'EUR' ) ); ?>" />
+
+					<p class="description"><?php printf( __( 'In ISO 4217 format, e.g. "EUR" or "USD". See <a href="%1$s" target="_blank">%1$s</a> for a complete list of valid currency codes.', $_this->text_domain() ), 'https://developers.google.com/adwords/api/docs/appendix/codes-formats#currency-codes' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="default_conversion_id"><?php _e( 'Default Conversion ID', $_this->text_domain() ); ?></label></th>
+				<td>
+					<input type="number" class="regular-text" id="default_conversion_id" name="default_conversion_id" value="<?php echo esc_attr( $_this->option( 'default_conversion_id' ) ); ?>" min="0" step="1" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="default_conversion_label"><?php _e( 'Default Conversion Label', $_this->text_domain() ); ?></label></th>
+				<td>
+					<input type="text" class="regular-text" id="default_conversion_label" name="default_conversion_label" value="<?php echo esc_attr( $_this->option( 'default_conversion_label' ) ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="default_conversion_value"><?php _e( 'Default Conversion Value', $_this->text_domain() ); ?></label></th>
+				<td>
+					<input type="number" id="default_conversion_value" name="default_conversion_value" value="<?php echo esc_attr( $_this->option( 'default_conversion_value', 0 ) ); ?>" step="1" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="default_remarketing_only"><?php _e( 'Default Remarketing Only State', $_this->text_domain() ); ?></label></th>
+				<td>
+					<select id="default_remarketing_only" name="default_remarketing_only">
+						<?php
+							foreach ( array( 0 => 'false', 1 => 'true' ) as $value => $option ) {
+								print '<option value="' . esc_attr( $value ) . '"' . ( (int) $_this->option( 'default_remarketing_only', false ) == $value ? ' selected="selected"'
+										: '' ) . '>' . esc_html( $option ) . '</option>';
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="load_adwords_conversion_async_script"><?php _e( 'Load the Google AdWords conversion script', $_this->text_domain() ); ?></label></th>
+				<td>
+					<select id="load_adwords_conversion_async_script" name="load_adwords_conversion_async_script">
+						<?php
+							foreach ( array( 0 => __( 'No' ), 1 => __( 'Yes' ) ) as $value => $option ) {
+								print '<option value="' . esc_attr( $value ) . '"' . ( (int) $_this->option( 'load_adwords_conversion_async_script', true ) == $value
+										? ' selected="selected"' : '' ) . '>' . esc_html( $option ) . '</option>';
+							}
+						?>
+					</select>
+
+					<p class="description"><?php _e( 'Disable loading the asynchronous conversion script when it\'s already been loaded by your theme or another plugin.', $_this->text_domain() ); ?></p>
+				</td>
+			</tr>
+		</table>
+
+		<p class="submit">
+			<input class="button-primary" type="submit" value="<?php _e( 'Update' ) ?>" />
+		</p>
+
+		<input type="hidden" name="action" value="save_plugin_settings" />
+		<?php wp_nonce_field( 'save-plugin-settings' ); ?>
+	</form>
+
+	<h2 style="margin-top:50px"><?php _e( 'Usage', $_this->text_domain() ); ?></h2>
+
+	<table class="form-table">
+		<tr>
+			<th scope="row"><h3 style="font-size:1.2em;margin-top:0"><?php printf( __( 'Step %d', $_this->text_domain() ), 1 ); ?></h3></th>
+			<td>
+				<p><?php printf( __( 'Create a new conversion action in your Google AdWords account. Make sure to set "Choose whether to track conversions on a page load or click" to "Click". Read the <a href="%1$s" target="_blank">AdWords Help pages</a> if you need help with setting up conversion tracking.', $_this->text_domain() ), __( 'https://support.google.com/adwords/answer/6095821', $_this->text_domain() ) ); ?></p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><h3 style="font-size:1.2em;margin-top:0"><?php printf( __( 'Step %d', $_this->text_domain() ), 2 ); ?></h3></th>
+			<td>
+				<p><?php printf( __( 'Look up the conversion tag and use the values of the %s variables. If this is your first conversion action you want to track using this plugin, you can save these values in the fields above. Otherwise, use them in combination with the %s attributes as shown in the examples below. You can optionally change the currency and value fields to whatever you like.', $_this->text_domain() ), '<code>w.google_*</code>', '<code>data-*</code>' ); ?></p>
+				<p><?php _e( 'The conversion tag should look like the code below. Note that the fields you have to use are marked.', $_this->text_domain() ); ?></p>
+				<p><img src="<?php echo $_this->plugins_url( 'assets/conversion-tag.png' ); ?>" /></p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><h3 style="font-size:1.2em;margin-top:0"><?php printf( __( 'Step %d', $_this->text_domain() ), 3 ); ?></h3></th>
+			<td>
+				<p><?php printf( __( 'Use the class %s on an HTML element to track a conversion when a visitor clicks on that element. When the element with the %1$s class has an %s or a %s attribute, or when the element with that class contains an element with one of these attributes, that URL will be followed after the conversion has been tracked.', $_this->text_domain() ), '<code>aw-track-click</code>', '<code>href</code>', '<code>data-href</code>' ); ?></p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"></th>
+			<td>
+				<h4><?php _e( 'Standard usage', $_this->text_domain() ); ?></h4>
+				<p><?php printf( __( 'Use just the class %s on an HTML element to track clicks using the default settings above.', $_this->text_domain() ), '<code>aw-track-click</code>' ); ?></p>
+				<br />
+				<textarea class="large-text code" rows="3"><?php
+						echo htmlentities( '<a href="/a-conversion-page/" class="aw-track-click">Anchor Text</a>', ENT_NOQUOTES );
+					?></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"></th>
+			<td>
+				<h4><?php _e( 'Overwriting default values', $_this->text_domain() ); ?></h4>
+				<p><?php printf( __( 'Use the class %s in combination with one or more %s attributes to overwrite the default settings above for just one element.', $_this->text_domain() ), '<code>aw-track-click</code>', '<code>data-*</code>' ); ?></p>
+				<br />
+				<textarea class="large-text code" rows="3"><?php
+						echo htmlentities( '<a href="/a-conversion-page/" class="aw-track-click" data-conversion-label="DeFGHIJklmN0PQRst">Anchor Text</a>', ENT_NOQUOTES );
+					?></textarea>
+				<br />
+				<br />
+				<p><?php printf( __( 'The following %s attributes are available to use:', $_this->text_domain() ), '<code>data-*</code>' ); ?></p>
+
+				<ul>
+					<li><code>data-conversion-currency="USD|EUR|..."</code></li>
+					<li><code>data-conversion-id="123456789"</code></li>
+					<li><code>data-conversion-label="DeFGHIJklmN0PQRst"</code></li>
+					<li><code>data-conversion-value="15.50"</code> <span class="description"><?php _e( 'Use a dot as a decimal separator.', $_this->text_domain() ); ?></span></li>
+					<li><code>data-remarketing-only="true|false"</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"></th>
+			<td>
+				<h4><?php _e( 'Following a link with elements other than anchors or buttons', $_this->text_domain() ); ?></h4>
+				<p><?php printf( __( 'Use the %s attribute to follow a link after a click on HTML elements that do not allow the %s attribute, such as an %s element.', $_this->text_domain() ), '<code>data-href</code>', '<code>href</code>', '<code>&lt;img /&gt;</code>' ); ?></p>
+				<br />
+				<textarea class="large-text code" rows="3"><?php
+						echo htmlentities( '<img src="/wp-content/uploads/' . date('Y') . '/01/an-image.png" class="aw-track-click" data-conversion-label="DeFGHIJklmN0PQRst" data-href="/a-conversion-page/" />', ENT_NOQUOTES );
+					?></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"></th>
+			<td>
+				<h4><?php _e( 'Following a link from an anchor inside the tracked element', $_this->text_domain() ); ?></h4>
+				<p><?php printf( __( 'When the element with the tracking class contains an element with an %s or a %s attribute, that URL will be followed after the conversion has been tracked. This comes in handy when you use a page builder where you cannot add the tracking class to the anchor or button directly.', $_this->text_domain() ), '<code>data-href</code>', '<code>href</code>', '<code>&lt;img /&gt;</code>' ); ?></p>
+				<textarea class="large-text code" rows="4"><?php
+						echo htmlentities( '<div class="aw-track-click" data-conversion-value="49.95">' . "\n\t" . '<a href="/a-conversion-page/">Anchor Text</a>' . "\n" . '</div>', ENT_NOQUOTES );
+					?></textarea>
+			</td>
+		</tr>
+	</table>
+</div>
